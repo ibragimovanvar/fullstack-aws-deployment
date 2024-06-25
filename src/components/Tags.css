@@ -1,0 +1,29 @@
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: 0.25rem;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    color: #333;
+    font-size: 0.875rem;
+}
+
+.tag-blue {
+    background-color: #d0ebff;
+}
+
+.tag-green {
+    background-color: #d3f9d8;
+}
+
+.tag-red {
+    background-color: #ffe3e3;
+}
+
+.tag-yellow {
+    background-color: #fff3bf;
+}
+
+.tag-purple {
+    background-color: #e4c8ff;
+}
