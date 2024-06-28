@@ -1,36 +1,54 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '../components/Table';
 import Modal from '../components/Modal';
 
 const TasksPage = () => {
-    const bakend_url = 'http://localhost:8080/api/v1/tasks';
+    const backend_url = 'http://18.142.240.80:8080/api/v1/tasks';
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         document.title = 'Tasks Page';
-        fetch(bakend_url)
-            .then(response => response.json())
-            .then(data => setData(data));
+        fetch(backend_url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => setData(data))
+            .catch(error => console.error('Fetch error:', error));
     }, []);
 
     const handleAdd = (newEntry) => {
-        fetch(bakend_url, {
+        fetch(backend_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(newEntry),
         })
-            .then(response => response.json())
-            .then(savedEntry => setData([...data, savedEntry]));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(savedEntry => setData([...data, savedEntry])) // This line updates the state with the new entry
+            .catch(error => console.error('Fetch error:', error));
     };
 
     const handleDelete = (id) => {
-        fetch(bakend_url + `${id}`, {
+        fetch(`${backend_url}/${id}`, {
             method: 'DELETE',
         })
-            .then(() => setData(data.filter(item => item.id !== id)));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                setData(data.filter(item => item.id !== id));
+            })
+            .catch(error => console.error('Fetch error:', error));
     };
 
     return (
@@ -43,9 +61,10 @@ const TasksPage = () => {
                     onSave={handleAdd}
                 />
             )}
-            <Table data={data} onDelete={handleDelete}/>
+            <Table data={data} onDelete={handleDelete} />
         </div>
     );
 };
 
 export default TasksPage;
+

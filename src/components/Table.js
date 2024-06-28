@@ -35,3 +35,4 @@ const Table = ({ data, onDelete }) => {
 
 export default Table;
 
+

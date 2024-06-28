@@ -40,7 +40,7 @@ const Modal = ({ onClose, onSave }) => {
                         />
                     </div>
                     <div>
-                        <label>Tags (vergul bilan ajrating)</label>
+                        <label>Tags (separate with commas)</label>
                         <input
                             type="text"
                             value={tags}

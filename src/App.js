@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TasksPage from './pages/TasksPage';
 
 function App() {
     useEffect(() => {
-        document.title = "Frontend App"
+        document.title = "Frontend App";
     }, []);
+
     return (
         <Router>
             <div className="App">
@@ -20,3 +21,5 @@ function App() {
 }
 
 export default App;
+
+
